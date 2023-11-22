@@ -1,6 +1,7 @@
 package logico;
 
 public class Persona {
+	
 	protected String cedula;
 	protected String nombre;
 	protected char sexo;
@@ -55,6 +56,5 @@ public class Persona {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	
-	
+		
 }
