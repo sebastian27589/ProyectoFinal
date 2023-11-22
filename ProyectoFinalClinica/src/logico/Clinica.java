@@ -37,6 +37,22 @@ public class Clinica {
 		this.misViviendas = misViviendas;
 	}
 	
+	public ArrayList<Cita> getMisCitas() {
+		return misCitas;
+	}
+
+	public void setMisCitas(ArrayList<Cita> misCitas) {
+		this.misCitas = misCitas;
+	}
+
+	public ArrayList<Persona> getMisPersonas() {
+		return misPersonas;
+	}
+
+	public void setMisPersonas(ArrayList<Persona> misPersonas) {
+		this.misPersonas = misPersonas;
+	}
+
 	public ArrayList<Vacuna> getMisVacunas() {
 		return misVacunas;
 	}
