@@ -8,6 +8,15 @@ public class Vivienda {
 	private String ciudad;
 	private String telefonoResi;
 	
+	public Vivienda(String calle, String numero, String sector, String ciudad, String telefonoResi) {
+		super();
+		this.calle = calle;
+		this.numero = numero;
+		this.sector = sector;
+		this.ciudad = ciudad;
+		this.telefonoResi = telefonoResi;
+	}
+
 	public String getCalle() {
 		return calle;
 	}

@@ -11,6 +11,17 @@ public class ConsultaMedica {
 	private String diagnostico;
 	private Date fechaConsulta;
 	
+	public ConsultaMedica(String codeConsMed, String nombreMedico, Enfermedad enfermedad, String sintomas,
+			String diagnostico, Date fechaConsulta) {
+		super();
+		this.codeConsMed = codeConsMed;
+		this.nombreMedico = nombreMedico;
+		this.enfermedad = enfermedad;
+		this.sintomas = sintomas;
+		this.diagnostico = diagnostico;
+		this.fechaConsulta = fechaConsulta;
+	}
+
 	public String getCodeConsMed() {
 		return codeConsMed;
 	}
