@@ -6,7 +6,14 @@ public class Enfermedad {
 	private String tipo;
 	private String sintomas;
 	private boolean vigilada;
-	
+
+	public Enfermedad(String nombre, String tipo, String sintomas, boolean vigilada) {
+		super();
+		this.nombre = nombre;
+		this.tipo = tipo;
+		this.sintomas = sintomas;
+		this.vigilada = vigilada;
+	}
 
 	public String getNombre() {
 		return nombre;
