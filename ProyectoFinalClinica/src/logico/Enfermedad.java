@@ -5,13 +5,15 @@ public class Enfermedad {
 	private String nombre;
 	private String tipo;
 	private String sintomas;
+	private int indPeligro;
 	private boolean vigilada;
 
-	public Enfermedad(String nombre, String tipo, String sintomas, boolean vigilada) {
+	public Enfermedad(String nombre, String tipo, String sintomas, int indPeligro,boolean vigilada) {
 		super();
 		this.nombre = nombre;
 		this.tipo = tipo;
 		this.sintomas = sintomas;
+		this.indPeligro = indPeligro;
 		this.vigilada = vigilada;
 	}
 
@@ -45,6 +47,14 @@ public class Enfermedad {
 	
 	public void setVigilada(boolean vigilada) {
 		this.vigilada = vigilada;
+	}
+
+	public int getIndPeligro() {
+		return indPeligro;
+	}
+
+	public void setIndPeligro(int indPeligro) {
+		this.indPeligro = indPeligro;
 	}
 	
 }

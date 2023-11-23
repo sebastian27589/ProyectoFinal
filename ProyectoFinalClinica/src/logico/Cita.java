@@ -22,10 +22,6 @@ public class Cita {
 		return numCita;
 	}
 
-	public void setNumCita(String numCita) {
-		this.numCita = numCita;
-	}
-
 	public Persona getCliente() {
 		return cliente;
 	}

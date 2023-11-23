@@ -19,10 +19,6 @@ public class Vacuna {
 		return codeVacuna;
 	}
 	
-	public void setCodeVacuna(String codeVacuna) {
-		this.codeVacuna = codeVacuna;
-	}
-	
 	public String getNombre() {
 		return nombre;
 	}

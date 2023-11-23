@@ -16,10 +16,6 @@ public class Medico extends Persona {
 		return codeMedico;
 	}
 
-	public void setCodeMedico(String codeMedico) {
-		this.codeMedico = codeMedico;
-	}
-
 	public String getEspecialidad() {
 		return especialidad;
 	}

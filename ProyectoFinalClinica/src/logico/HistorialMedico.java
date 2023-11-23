@@ -23,10 +23,6 @@ public class HistorialMedico {
 		return codeHistMed;
 	}
 	
-	public void setCodeHistMed(String codeHistMed) {
-		this.codeHistMed = codeHistMed;
-	}
-	
 	public Paciente getPaciente() {
 		return paciente;
 	}

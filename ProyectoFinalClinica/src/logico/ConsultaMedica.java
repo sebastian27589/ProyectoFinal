@@ -29,16 +29,8 @@ public class ConsultaMedica {
 		return codeConsMed;
 	}
 	
-	public void setCodeConsMed(String codeConsMed) {
-		this.codeConsMed = codeConsMed;
-	}
-	
 	public String getCodeMedico() {
 		return codeMedico;
-	}
-	
-	public void setCodeMedico(String codeMedico) {
-		this.codeMedico = codeMedico;
 	}
 	
 	public Enfermedad getEnfermedad() {

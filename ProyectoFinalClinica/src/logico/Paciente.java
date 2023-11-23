@@ -20,10 +20,6 @@ public class Paciente extends Persona {
 		return codePaciente;
 	}
 
-	public void setCodePaciente(String codePaciente) {
-		this.codePaciente = codePaciente;
-	}
-
 	public ArrayList<ConsultaMedica> getMisConsultas() {
 		return misConsultas;
 	}
