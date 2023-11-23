@@ -4,16 +4,16 @@ import java.util.Date;
 
 public class Cita {
 	private String numCita;
-	private String nombreCliente;
-	private String nombreMedico;
+	private Persona cliente;
+	private String codeMedico;
 	private boolean pendiente;
 	private Date fechaDeCita;
 	
-	public Cita(String numCita, String nombreCliente, String nombreMedico, boolean pendiente, Date fechaDeCita) {
+	public Cita(String numCita, Persona cliente, String codeMedico, boolean pendiente, Date fechaDeCita) {
 		super();
 		this.numCita = numCita;
-		this.nombreCliente = nombreCliente;
-		this.nombreMedico = nombreMedico;
+		this.cliente = cliente;
+		this.codeMedico = codeMedico;
 		this.pendiente = pendiente;
 		this.fechaDeCita = fechaDeCita;
 	}
@@ -26,20 +26,20 @@ public class Cita {
 		this.numCita = numCita;
 	}
 
-	public String getNombreCliente() {
-		return nombreCliente;
+	public Persona getCliente() {
+		return cliente;
 	}
 
-	public void setNombreCliente(String nombreCliente) {
-		this.nombreCliente = nombreCliente;
+	public void setCliente(Persona cliente) {
+		this.cliente = cliente;
 	}
 
-	public String getNombreMedico() {
-		return nombreMedico;
+	public String getCodeMedico() {
+		return codeMedico;
 	}
 
-	public void setNombreMedico(String nombreMedico) {
-		this.nombreMedico = nombreMedico;
+	public void setCodeMedico(String codeMedico) {
+		this.codeMedico = codeMedico;
 	}
 
 	public boolean isPendiente() {
