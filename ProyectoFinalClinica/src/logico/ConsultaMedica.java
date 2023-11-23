@@ -1,5 +1,6 @@
 package logico;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class ConsultaMedica {
@@ -9,6 +10,7 @@ public class ConsultaMedica {
 	private Enfermedad enfermedad;
 	private String sintomas;
 	private String diagnostico;
+	private ArrayList<String> analisis;
 	private Date fechaConsulta;
 	
 	public ConsultaMedica(String codeConsMed, String nombreMedico, Enfermedad enfermedad, String sintomas,
@@ -19,6 +21,7 @@ public class ConsultaMedica {
 		this.enfermedad = enfermedad;
 		this.sintomas = sintomas;
 		this.diagnostico = diagnostico;
+		this.analisis = new ArrayList<String>();
 		this.fechaConsulta = fechaConsulta;
 	}
 
@@ -68,6 +71,14 @@ public class ConsultaMedica {
 	
 	public void setFechaConsulta(Date fechaConsulta) {
 		this.fechaConsulta = fechaConsulta;
+	}
+
+	public ArrayList<String> getAnalisis() {
+		return analisis;
+	}
+
+	public void setAnalisis(ArrayList<String> analisis) {
+		this.analisis = analisis;
 	}
 
 }
