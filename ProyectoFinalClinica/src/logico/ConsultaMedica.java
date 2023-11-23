@@ -6,18 +6,18 @@ import java.util.Date;
 public class ConsultaMedica {
 
 	private String codeConsMed;
-	private String nombreMedico;
+	private String codeMedico;
 	private Enfermedad enfermedad;
 	private String sintomas;
 	private String diagnostico;
 	private ArrayList<String> analisis;
 	private Date fechaConsulta;
 	
-	public ConsultaMedica(String codeConsMed, String nombreMedico, Enfermedad enfermedad, String sintomas,
+	public ConsultaMedica(String codeConsMed, String codeMedico, Enfermedad enfermedad, String sintomas,
 			String diagnostico, Date fechaConsulta) {
 		super();
 		this.codeConsMed = codeConsMed;
-		this.nombreMedico = nombreMedico;
+		this.codeMedico = codeMedico;
 		this.enfermedad = enfermedad;
 		this.sintomas = sintomas;
 		this.diagnostico = diagnostico;
@@ -33,12 +33,12 @@ public class ConsultaMedica {
 		this.codeConsMed = codeConsMed;
 	}
 	
-	public String getNombreMedico() {
-		return nombreMedico;
+	public String getCodeMedico() {
+		return codeMedico;
 	}
 	
-	public void setNombreMedico(String nombreMedico) {
-		this.nombreMedico = nombreMedico;
+	public void setCodeMedico(String codeMedico) {
+		this.codeMedico = codeMedico;
 	}
 	
 	public Enfermedad getEnfermedad() {

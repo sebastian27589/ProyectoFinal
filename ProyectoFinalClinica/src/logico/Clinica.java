@@ -69,4 +69,7 @@ public class Clinica {
 		this.misEnfermedades = misEnfermedades;
 	}
 	
+	//
+	
+	
 }

@@ -1,7 +1,10 @@
 package logico;
 
-public class Vivienda {
+import java.util.ArrayList;
 
+public class Vivienda {
+	
+	private ArrayList<Persona> residentes;
 	private String calle;
 	private String numero;
 	private String sector;
@@ -10,11 +13,20 @@ public class Vivienda {
 	
 	public Vivienda(String calle, String numero, String sector, String ciudad, String telefonoResi) {
 		super();
+		this.residentes = new ArrayList<Persona>();
 		this.calle = calle;
 		this.numero = numero;
 		this.sector = sector;
 		this.ciudad = ciudad;
 		this.telefonoResi = telefonoResi;
+	}
+	
+	public ArrayList<Persona> getResidentes() {
+		return residentes;
+	}
+	
+	public void setResidentes(ArrayList<Persona> residentes) {
+		this.residentes = residentes;
 	}
 
 	public String getCalle() {
