@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import logico.Vivienda;
+
 import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -19,6 +21,9 @@ import java.awt.event.ActionEvent;
 public class MostrarVivienda extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	private static DefaultTableModel model;
+	private static Object[] row;
+	private Vivienda selected = null;
 	private JTable table;
 
 	/**
@@ -51,19 +56,23 @@ public class MostrarVivienda extends JDialog {
 		rayita1 = new Color(rayita1.getRed(), rayita1.getGreen(), rayita1.getBlue(), alpha);
 		rayita2 = new Color(rayita2.getRed(), rayita2.getGreen(), rayita2.getBlue(), alpha2);
 		Object[] columnNames = {"Núm. Vivienda", "Calle", "Sector", "Ciudad", "Teléfono", "Residentes"};
-		Object[][] data = {
-				{"0001", "Calle del Sol", "Santiago", "Santiago", "809-554-1124", false},
-		};
 		
-		DefaultTableModel tablemodel = new DefaultTableModel(data, columnNames) {
-			@Override
+//		Object[][] data = {
+//				{"0001", "Calle del Sol", "Santiago", "Santiago", "809-554-1124", false},
+//		};
+		model = new DefaultTableModel() {
 			public Class<?> getColumnClass(int columnIndex){
 				if(columnIndex == 5) {
 					return Boolean.class;
 				}
 				return super.getColumnClass(columnIndex);
 			}
+			
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
 		};
+		model.setColumnIdentifiers(columnNames);
 		contentPanel.setBackground(backgroundColor);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -78,7 +87,7 @@ public class MostrarVivienda extends JDialog {
 			JScrollPane scrollPane = new JScrollPane(table);
 			panel_2.add(scrollPane, BorderLayout.CENTER);
 			
-			table = new JTable(tablemodel);
+			table = new JTable(model);
 			table.setFillsViewportHeight(true);
 			scrollPane.setViewportView(table);
 		}
