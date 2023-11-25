@@ -51,18 +51,19 @@ public class RegPaciente extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegPaciente() {
-		setTitle("Registrar paciente");
-		setBounds(100, 100, 554, 345);
+		setResizable(false);
+		setTitle("Registrar Paciente");
+		setBounds(100, 100, 554, 331);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(218, 221, 216));
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
 			JPanel panelContenedor1 = new JPanel();
 			panelContenedor1.setOpaque(false);
 			panelContenedor1.setBackground(new Color(218, 221, 216));
-			panelContenedor1.setBounds(0, 11, 538, 93);
+			panelContenedor1.setBounds(0, 11, 538, 116);
 			contentPanel.add(panelContenedor1);
 			panelContenedor1.setLayout(null);
 			
@@ -87,7 +88,7 @@ public class RegPaciente extends JDialog {
 			
 			txtCodePaciente = new JTextField();
 			txtCodePaciente.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
-			txtCodePaciente.setBounds(105, 19, 72, 22);
+			txtCodePaciente.setBounds(105, 19, 62, 22);
 			panelContenedor1.add(txtCodePaciente);
 			txtCodePaciente.setColumns(10);
 			
@@ -124,63 +125,70 @@ public class RegPaciente extends JDialog {
 			JDateChooser dateChooserNacim = new JDateChooser();
 			dateChooserNacim.setBounds(373, 54, 140, 22);
 			panelContenedor1.add(dateChooserNacim);
+			
+			JLabel lblSexo = new JLabel("Sexo:");
+			lblSexo.setBounds(23, 87, 72, 22);
+			panelContenedor1.add(lblSexo);
+			lblSexo.setOpaque(true);
+			lblSexo.setHorizontalAlignment(SwingConstants.CENTER);
+			lblSexo.setForeground(Color.BLACK);
+			lblSexo.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
+			lblSexo.setBackground(Color.WHITE);
+			
+			JRadioButton rdbtnMasculino = new JRadioButton("M");
+			rdbtnMasculino.setBounds(129, 87, 38, 22);
+			panelContenedor1.add(rdbtnMasculino);
+			rdbtnMasculino.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
+			
+			JRadioButton rdbtnFemenino = new JRadioButton("F");
+			rdbtnFemenino.setBounds(184, 87, 33, 22);
+			panelContenedor1.add(rdbtnFemenino);
+			rdbtnFemenino.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
+			
+			JLabel lblTelefono = new JLabel("Telefono:");
+			lblTelefono.setBounds(292, 87, 72, 22);
+			panelContenedor1.add(lblTelefono);
+			lblTelefono.setOpaque(true);
+			lblTelefono.setHorizontalAlignment(SwingConstants.CENTER);
+			lblTelefono.setForeground(Color.BLACK);
+			lblTelefono.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
+			lblTelefono.setBackground(Color.WHITE);
+			
+			txtTelefono = new JTextField();
+			txtTelefono.setBounds(374, 87, 140, 22);
+			panelContenedor1.add(txtTelefono);
+			txtTelefono.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
+			txtTelefono.setColumns(10);
 		}
 		
 		JPanel panelVerde = new JPanel();
+		panelVerde.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelVerde.setBackground(new Color(107, 170, 117, 60));
-		panelVerde.setBounds(0, 21, 538, 50);
+		panelVerde.setBounds(0, 21, 538, 114);
 		contentPanel.add(panelVerde);
 		
 		JPanel panelGris = new JPanel();
+		panelGris.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelGris.setBackground(new Color(105, 116, 124, 120));
-		panelGris.setBounds(0, 81, 538, 50);
+		panelGris.setBounds(0, 145, 538, 77);
 		contentPanel.add(panelGris);
 		panelGris.setLayout(null);
 		
-		JLabel lblSexo = new JLabel("Sexo:");
-		lblSexo.setBounds(23, 17, 72, 22);
-		panelGris.add(lblSexo);
-		lblSexo.setOpaque(true);
-		lblSexo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSexo.setForeground(Color.BLACK);
-		lblSexo.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
-		lblSexo.setBackground(Color.WHITE);
-		
-		JRadioButton rdbtnMasculino = new JRadioButton("M");
-		rdbtnMasculino.setBounds(129, 17, 38, 22);
-		panelGris.add(rdbtnMasculino);
-		rdbtnMasculino.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
-		
-		JRadioButton rdbtnFemenino = new JRadioButton("F");
-		rdbtnFemenino.setBounds(184, 17, 33, 22);
-		panelGris.add(rdbtnFemenino);
-		rdbtnFemenino.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
-		
-		JLabel lblTelefono = new JLabel("Telefono:");
-		lblTelefono.setBounds(292, 17, 72, 22);
-		panelGris.add(lblTelefono);
-		lblTelefono.setOpaque(true);
-		lblTelefono.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTelefono.setForeground(Color.BLACK);
-		lblTelefono.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
-		lblTelefono.setBackground(Color.WHITE);
-		
-		txtTelefono = new JTextField();
-		txtTelefono.setBounds(374, 17, 140, 22);
-		panelGris.add(txtTelefono);
-		txtTelefono.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
-		txtTelefono.setColumns(10);
+		JLabel lblNewLabel = new JLabel("(Opcional)");
+		lblNewLabel.setBounds(106, 43, 58, 14);
+		panelGris.add(lblNewLabel);
+		lblNewLabel.setFont(new Font("Gill Sans MT", Font.PLAIN, 13));
 		
 		JTextArea txtareaDireccion = new JTextArea();
-		txtareaDireccion.setBounds(107, 142, 257, 54);
-		contentPanel.add(txtareaDireccion);
+		txtareaDireccion.setBounds(181, 11, 257, 54);
+		panelGris.add(txtareaDireccion);
 		txtareaDireccion.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
 		txtareaDireccion.setLineWrap(true);
 		txtareaDireccion.setWrapStyleWord(true);
 		
 		JLabel lblDireccion = new JLabel("Direcci\u00F3n:");
-		lblDireccion.setBounds(23, 142, 74, 22);
-		contentPanel.add(lblDireccion);
+		lblDireccion.setBounds(97, 18, 74, 22);
+		panelGris.add(lblDireccion);
 		lblDireccion.setOpaque(true);
 		lblDireccion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDireccion.setForeground(Color.BLACK);
@@ -192,11 +200,11 @@ public class RegPaciente extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton btnRegistrar = new JButton("Registrar");
-				btnRegistrar.setFont(new Font("Gill Sans MT", Font.PLAIN, 14));
-				btnRegistrar.setActionCommand("OK");
-				buttonPane.add(btnRegistrar);
-				getRootPane().setDefaultButton(btnRegistrar);
+				JButton btnSiguiente = new JButton("Siguiente");
+				btnSiguiente.setFont(new Font("Gill Sans MT", Font.PLAIN, 14));
+				btnSiguiente.setActionCommand("OK");
+				buttonPane.add(btnSiguiente);
+				getRootPane().setDefaultButton(btnSiguiente);
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");

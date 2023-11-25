@@ -6,12 +6,14 @@ public class Vacuna {
 
 	private String codeVacuna;
 	private String nombre;
+	private String laboratorio;
 	private ArrayList<Enfermedad> enfermedadesQueTrata;
-	
-	public Vacuna(String codeVacuna, String nombre) {
+
+	public Vacuna(String codeVacuna, String nombre, String laboratorio, ArrayList<Enfermedad> enfermedadesQueTrata) {
 		super();
 		this.codeVacuna = codeVacuna;
 		this.nombre = nombre;
+		this.laboratorio = laboratorio;
 		this.enfermedadesQueTrata = new ArrayList<Enfermedad>();
 	}
 
@@ -27,6 +29,14 @@ public class Vacuna {
 		this.nombre = nombre;
 	}
 	
+	public String getLaboratorio() {
+		return laboratorio;
+	}
+
+	public void setLaboratorio(String laboratorio) {
+		this.laboratorio = laboratorio;
+	}
+
 	public ArrayList<Enfermedad> getEnfermedadesQueTrata() {
 		return enfermedadesQueTrata;
 	}
