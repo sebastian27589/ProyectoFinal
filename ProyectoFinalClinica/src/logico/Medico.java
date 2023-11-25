@@ -1,13 +1,15 @@
 package logico;
 
+import java.util.Date;
+
 public class Medico extends Persona {
 
 	private String codeMedico;
 	private String especialidad;
 	
-	public Medico(String cedula, String nombre, char sexo, String telefono, String direccion, String codeMedico,
-			String especialidad) {
-		super(cedula, nombre, sexo, telefono, direccion);
+	public Medico(String cedula, String nombre, Date fechaDeNacimiento, char sexo, String telefono, String direccion,
+			String codeMedico, String especialidad) {
+		super(cedula, nombre, fechaDeNacimiento, sexo, telefono, direccion);
 		this.codeMedico = codeMedico;
 		this.especialidad = especialidad;
 	}

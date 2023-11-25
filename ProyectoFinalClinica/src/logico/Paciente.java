@@ -1,6 +1,7 @@
 package logico;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Paciente extends Persona {
 
@@ -8,14 +9,14 @@ public class Paciente extends Persona {
 	private ArrayList<ConsultaMedica> misConsultas;
 	private ArrayList<Vacuna> misVacunas;
 	
-	public Paciente(String cedula, String nombre, char sexo, String telefono, String direccion, String codePaciente) {
-		super(cedula, nombre, sexo, telefono, direccion);
+	public Paciente(String cedula, String nombre, Date fechaDeNacimiento, char sexo, String telefono, String direccion,
+			String codePaciente, ArrayList<ConsultaMedica> misConsultas, ArrayList<Vacuna> misVacunas) {
+		super(cedula, nombre, fechaDeNacimiento, sexo, telefono, direccion);
 		this.codePaciente = codePaciente;
 		this.misConsultas = new ArrayList<ConsultaMedica>();
 		this.misVacunas = new ArrayList<Vacuna>();
-		
 	}
-	
+
 	public String getCodePaciente() {
 		return codePaciente;
 	}
