@@ -189,5 +189,26 @@ public class Clinica {
 		return pacienteABuscar;
 	}
 	
+	public Vivienda buscarViviendaByNum(String num) {
+		
+		Vivienda viviendaABuscar = null;
+		boolean encontrado = false;
+		int index = 0;
+		
+		while (!encontrado && index < misViviendas.size()) {
+			
+			if (misViviendas.get(index).getNumero().equalsIgnoreCase(num)) {
+				
+				viviendaABuscar = misViviendas.get(index);
+				encontrado = true;
+		
+			}
+			
+			index++;
+		}
+		
+		return viviendaABuscar;
+	}
+	
 	
 }
