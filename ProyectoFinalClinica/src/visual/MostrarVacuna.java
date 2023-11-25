@@ -8,7 +8,12 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
+import logico.Clinica;
+import logico.Vacuna;
 
 import java.awt.Color;
 import javax.swing.JScrollPane;
@@ -19,12 +24,22 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MostrarVacuna extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTable table;
-	private JTextField textField;
+	private JTable tableVacunas;
+	private JTextField txtBuscarVacuna;
+	private static DefaultTableModel model;
+	private static Object[] row;
+	private Vacuna selected = null;
 
 	/**
 	 * Launch the application.
@@ -43,6 +58,12 @@ public class MostrarVacuna extends JDialog {
 	 * Create the dialog.
 	 */
 	public MostrarVacuna() {
+		
+		Vacuna vac1 = new Vacuna("000", "neumococo", "LabSpain", null);
+		Vacuna vac2 = new Vacuna("001", "19-Vaccine", "Pfizer", null);
+		Clinica.getInstance().insertarVacuna(vac1);
+		Clinica.getInstance().insertarVacuna(vac2);
+		
 		setResizable(false);
 		setTitle("Mostrar Vacunas");
 		setBounds(100, 100, 857, 443);
@@ -58,11 +79,11 @@ public class MostrarVacuna extends JDialog {
 		
 		Object[] header = {"Código", "Nombre", "Laboratorio", "Enfermedades Que Trata"};
 		
-		DefaultTableModel model = new DefaultTableModel() {
+		model = new DefaultTableModel() {
 			
 			public Class getColumnClass(int column) {
 				
-				if (column == 5) {
+				if (column == 3) {
 					return Boolean.class;
 				}
 				else {
@@ -86,13 +107,36 @@ public class MostrarVacuna extends JDialog {
 			contentPanel.add(panel_2);
 			panel_2.setLayout(new BorderLayout(0, 0));
 			
-			JScrollPane scrollPane = new JScrollPane(table);
+			JScrollPane scrollPane = new JScrollPane(tableVacunas);
 			panel_2.add(scrollPane, BorderLayout.CENTER);
 			
-			table = new JTable(model);
-			table.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
-			table.setFillsViewportHeight(true);
-			scrollPane.setViewportView(table);
+			tableVacunas = new JTable(model);
+			tableVacunas.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					
+					int rowIndex = tableVacunas.getSelectedRow(), colIndex = tableVacunas.getSelectedColumn();
+					
+					if (rowIndex >= 0) {
+						
+						selected = Clinica.getInstance().buscarVacunaByCode(tableVacunas.getValueAt(rowIndex, 0).toString());
+						
+						if (colIndex == 3) {
+							
+							selected = Clinica.getInstance().buscarVacunaByCode(tableVacunas.getValueAt(rowIndex, 0).toString());
+							// Aquí se debe abrir un MostrarEnfermedad con las enfermedades que tiene Vacuna en enfermedadesQueTrata
+							System.out.println("Abrir MostrarEnfermedad");
+							tableVacunas.setValueAt(Boolean.FALSE, rowIndex, colIndex);
+							
+						}
+						
+					}
+					
+				}
+			});
+			tableVacunas.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
+			tableVacunas.setFillsViewportHeight(true);
+			scrollPane.setViewportView(tableVacunas);
 		}
 		
 		JPanel panel_1 = new JPanel();
@@ -114,11 +158,21 @@ public class MostrarVacuna extends JDialog {
 		lblBuscarVacuna.setBounds(53, 36, 55, 22);
 		panel.add(lblBuscarVacuna);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
-		textField.setBounds(118, 36, 273, 22);
-		panel.add(textField);
-		textField.setColumns(10);
+		txtBuscarVacuna = new JTextField();
+		txtBuscarVacuna.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				
+				DefaultTableModel searchModel1 = (DefaultTableModel) tableVacunas.getModel();
+				TableRowSorter<DefaultTableModel> searchModel2 = new TableRowSorter<DefaultTableModel>(searchModel1);
+				tableVacunas.setRowSorter(searchModel2);
+				searchModel2.setRowFilter(RowFilter.regexFilter("(?i)" + txtBuscarVacuna.getText()));
+			}
+		});
+		txtBuscarVacuna.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
+		txtBuscarVacuna.setBounds(118, 36, 307, 22);
+		panel.add(txtBuscarVacuna);
+		txtBuscarVacuna.setColumns(10);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -126,20 +180,32 @@ public class MostrarVacuna extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setFont(new Font("Gill Sans MT", Font.PLAIN, 14));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
 					}
 				});
-				{
-					JButton okButton = new JButton("Modificar");
-					buttonPane.add(okButton);
-					okButton.setActionCommand("OK");
-					getRootPane().setDefaultButton(okButton);
-				}
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
 		}
+		
+		loadVacunas();
 	}
+	
+	public static void loadVacunas() {
+		
+		model.setRowCount(0);
+		row = new Object[model.getColumnCount()];
+		
+		for (Vacuna vacuna : Clinica.getInstance().getMisVacunas()) {
+			row[0] = vacuna.getCodeVacuna();
+			row[1] = vacuna.getNombre();
+			row[2] = vacuna.getLaboratorio(); 
+			model.addRow(row);
+		}
+		
+	}
+	
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Vivienda {
 	
-	private ArrayList<Persona> residentes;
+	private ArrayList<Paciente> residentes;
 	private String calle;
 	private String numero;
 	private String sector;
@@ -13,7 +13,7 @@ public class Vivienda {
 	
 	public Vivienda(String calle, String numero, String sector, String ciudad, String telefonoResi) {
 		super();
-		this.residentes = new ArrayList<Persona>();
+		this.residentes = new ArrayList<Paciente>();
 		this.calle = calle;
 		this.numero = numero;
 		this.sector = sector;
@@ -21,11 +21,11 @@ public class Vivienda {
 		this.telefonoResi = telefonoResi;
 	}
 	
-	public ArrayList<Persona> getResidentes() {
+	public ArrayList<Paciente> getResidentes() {
 		return residentes;
 	}
 	
-	public void setResidentes(ArrayList<Persona> residentes) {
+	public void setResidentes(ArrayList<Paciente> residentes) {
 		this.residentes = residentes;
 	}
 
@@ -69,4 +69,10 @@ public class Vivienda {
 		this.telefonoResi = telefonoResi;
 	}
 	
+	/*
+	public void insertarResidente(Paciente paciente) {
+		
+		residentes.add(paciente);
+	}
+	*/
 }

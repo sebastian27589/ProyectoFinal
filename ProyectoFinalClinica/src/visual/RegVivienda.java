@@ -10,8 +10,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import logico.Clinica;
+import logico.Paciente;
+import logico.Vivienda;
+
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -20,6 +25,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.LineBorder;
@@ -34,13 +40,18 @@ public class RegVivienda extends JDialog {
 	private JTextField txtTelefono;
 	private JTextField txtBuscar;
 	private JTextField txtNombre;
-
+	private Vivienda vivienda = null;
+	private ArrayList<Paciente> residentesAAgregar = new ArrayList<Paciente>();
+	private Paciente pacienteABuscar = new Paciente("", "", null, '0', "", "", "", null, null);
+	private JSpinner spnNumero;
+	private JButton btnAsignar;
+	
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
-			RegVivienda dialog = new RegVivienda();
+			RegVivienda dialog = new RegVivienda(null, false);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -51,9 +62,28 @@ public class RegVivienda extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public RegVivienda() {
-		setResizable(false);
+	public RegVivienda(Vivienda viviendaAModificar, boolean mod) {
+		
+		/*
+		 * Pacientes para probar el botón de búsqueda por cédula 
+		Clinica.getInstance().insertarPaciente(new Paciente("001", "Julito", null, 'M', "809", "123232", "000", null, null));
+		Clinica.getInstance().insertarPaciente(new Paciente("100", "Pedrito", null, 'M', "809", "123232", "000", null, null));
+		*/
 		setTitle("Registrar Vivienda");
+		
+		vivienda = viviendaAModificar;
+		
+		if (vivienda != null) {
+			
+			if (mod) {
+				setTitle("Modificar Vivienda");
+			}
+			else {
+				setTitle("Visualizar Vivienda");
+			}
+		}
+		
+		setResizable(false);
 		setBounds(100, 100, 554, 345);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(218, 221, 216));
@@ -138,7 +168,7 @@ public class RegVivienda extends JDialog {
 			lblNumero.setBounds(23, 79, 72, 22);
 			panelContenedor1.add(lblNumero);
 			
-			JSpinner spnNumero = new JSpinner();
+			spnNumero = new JSpinner();
 			spnNumero.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
 			spnNumero.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
 			spnNumero.setBounds(105, 79, 72, 22);
@@ -168,6 +198,19 @@ public class RegVivienda extends JDialog {
 		panelContenedor2.add(txtBuscar);
 		
 		JButton btnBuscar = new JButton("");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				pacienteABuscar = Clinica.getInstance().buscarPacienteByCedula(txtBuscar.getText());
+				
+				if (pacienteABuscar != null) {
+					
+					txtNombre.setText(pacienteABuscar.getNombre());
+					btnAsignar.setEnabled(true);
+				}
+				
+			}
+		});
 		btnBuscar.setBounds(257, 14, 25, 22);
 		panelContenedor2.add(btnBuscar);
 		
@@ -186,10 +229,20 @@ public class RegVivienda extends JDialog {
 		txtNombre.setBounds(94, 52, 188, 22);
 		panelContenedor2.add(txtNombre);
 		
-		JButton btnAsignar = new JButton("Asignar residente");
+		btnAsignar = new JButton("Asignar residente");
+		btnAsignar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				residentesAAgregar.add(pacienteABuscar);
+				txtBuscar.setText("");
+				txtNombre.setText("");
+				btnAsignar.setEnabled(false);
+			}
+		});
 		btnAsignar.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
 		btnAsignar.setBounds(94, 85, 140, 22);
 		panelContenedor2.add(btnAsignar);
+		btnAsignar.setEnabled(false);
 		
 		JLabel lblNewLabel = new JLabel("Imagen");
 		lblNewLabel.setBounds(400, 14, 113, 93);
@@ -201,6 +254,21 @@ public class RegVivienda extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnRegistrar = new JButton("Registrar");
+				btnRegistrar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						if (vivienda == null) {
+							
+							Vivienda nuevaVivienda = new Vivienda(txtCalle.getText(), spnNumero.getValue().toString(), txtSector.getText(), txtCiudad.getText(), txtTelefono.getText());
+							nuevaVivienda.getResidentes().addAll(residentesAAgregar);
+							Clinica.getInstance().insertarVivienda(nuevaVivienda);
+							JOptionPane.showMessageDialog(null, "Registrada con éxito", "Registrar Vivienda", JOptionPane.INFORMATION_MESSAGE);
+							clean();
+							
+						}
+						
+					}
+				});
 				btnRegistrar.setFont(new Font("Gill Sans MT", Font.PLAIN, 14));
 				btnRegistrar.setActionCommand("OK");
 				buttonPane.add(btnRegistrar);
@@ -219,4 +287,16 @@ public class RegVivienda extends JDialog {
 			}
 		}
 	}
+	
+	public void clean() {
+		
+		txtCalle.setText("");
+		txtSector.setText("");
+		spnNumero.setValue(new Integer(1));
+		txtCiudad.setText("");
+		txtTelefono.setText("");
+		txtBuscar.setText("");
+		txtNombre.setText("");
+	}
+	
 }

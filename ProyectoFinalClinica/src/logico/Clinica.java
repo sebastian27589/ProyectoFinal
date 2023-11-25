@@ -9,6 +9,12 @@ public class Clinica {
 	private ArrayList<Persona> misPersonas;
 	private ArrayList<Vacuna> misVacunas;
 	private ArrayList<Enfermedad> misEnfermedades;
+	public static int generadorCodePaciente = 1;
+	public static int generadorCodeMedico = 1;
+	public static int generadorCodeConsMed = 1;
+	public static int generadorCodeHistMed = 1;
+	public static int generadorCodeVacuna = 1;
+	public static int generadorNumCita = 1;
 	public static Clinica clinica = null; 
 	
 	public Clinica() {
@@ -69,7 +75,119 @@ public class Clinica {
 		this.misEnfermedades = misEnfermedades;
 	}
 	
-	//
+	public static int getGeneradorCodePaciente() {
+		return generadorCodePaciente;
+	}
+
+	public static void setGeneradorCodePaciente(int generadorCodePaciente) {
+		Clinica.generadorCodePaciente = generadorCodePaciente;
+	}
+
+	public static int getGeneradorCodeMedico() {
+		return generadorCodeMedico;
+	}
+
+	public static void setGeneradorCodeMedico(int generadorCodeMedico) {
+		Clinica.generadorCodeMedico = generadorCodeMedico;
+	}
+
+	public static int getGeneradorCodeConsMed() {
+		return generadorCodeConsMed;
+	}
+
+	public static void setGeneradorCodeConsMed(int generadorCodeConsMed) {
+		Clinica.generadorCodeConsMed = generadorCodeConsMed;
+	}
+
+	public static int getGeneradorCodeHistMed() {
+		return generadorCodeHistMed;
+	}
+
+	public static void setGeneradorCodeHistMed(int generadorCodeHistMed) {
+		Clinica.generadorCodeHistMed = generadorCodeHistMed;
+	}
+
+	public static int getGeneradorCodeVacuna() {
+		return generadorCodeVacuna;
+	}
+
+	public static void setGeneradorCodeVacuna(int generadorCodeVacuna) {
+		Clinica.generadorCodeVacuna = generadorCodeVacuna;
+	}
+
+	public static int getGeneradorNumCita() {
+		return generadorNumCita;
+	}
+
+	public static void setGeneradorNumCita(int generadorNumCita) {
+		Clinica.generadorNumCita = generadorNumCita;
+	}
+
+	public void insertarVivienda(Vivienda vivienda) {
+		
+		misViviendas.add(vivienda);
+		// Sysout de verificación [[Borrar más tarde]]
+		System.out.println(misViviendas.size()+" viviendas");
+	}
+	
+	public void insertarVacuna(Vacuna vacuna) {
+		
+		misVacunas.add(vacuna);
+		// Sysout de verificación [[Borrar más tarde]]
+		System.out.println(misVacunas.size()+" vacunas");
+	}
+	
+	public void insertarPaciente(Paciente paciente) {
+		
+		misPersonas.add(paciente);
+		generadorCodePaciente++;
+		// Sysout de verificación [[Borrar más tarde]]
+		System.out.println(misPersonas.size()+" pacientes");
+	}
+	
+	public Vacuna buscarVacunaByCode(String codigo) {
+		
+		Vacuna vacunaABuscar = null;
+		boolean encontrado = false;
+		int index = 0;
+		
+		while (!encontrado && index < misVacunas.size()) {
+			
+			if (misVacunas.get(index).getCodeVacuna().equalsIgnoreCase(codigo)) {
+				
+				vacunaABuscar = misVacunas.get(index);
+				encontrado = true;
+				
+			}
+			
+			index++;
+		}
+		
+		return vacunaABuscar;
+	}
+	
+	public Paciente buscarPacienteByCedula(String cedula) {
+		
+		Paciente pacienteABuscar = null;
+		boolean encontrado = false;
+		int index = 0;
+		
+		while (!encontrado && index < misPersonas.size()) {
+			
+			if (misPersonas.get(index) instanceof Paciente) {
+				
+				if (misPersonas.get(index).getCedula().equalsIgnoreCase(cedula)) {
+					pacienteABuscar = (Paciente) misPersonas.get(index);
+					encontrado = true;
+				}
+				
+			}
+			
+			index++;
+		}
+		
+		return pacienteABuscar;
+	}
 	
 	
 }
