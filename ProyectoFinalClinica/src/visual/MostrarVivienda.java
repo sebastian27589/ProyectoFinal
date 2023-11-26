@@ -58,8 +58,8 @@ public class MostrarVivienda extends JDialog {
 	 */
 	public MostrarVivienda() {
 		
-		Vivienda v1 = new Vivienda("#5", "01", "Las Rosas", "Santiago", "809", null);
-		Vivienda v2 = new Vivienda("#2", "02", "Cerro Alto", "Santiago", "809", null);
+		Vivienda v1 = new Vivienda("#5", "01", "Las Rosas", "Santiago", "809");
+		Vivienda v2 = new Vivienda("#2", "02", "Cerro Alto", "Santiago", "809");
 		Clinica.getInstance().insertarVivienda(v1);
 		Clinica.getInstance().insertarVivienda(v2);
 		

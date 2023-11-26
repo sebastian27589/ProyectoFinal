@@ -9,7 +9,7 @@ public class Vacuna {
 	private String laboratorio;
 	private ArrayList<Enfermedad> enfermedadesQueTrata;
 
-	public Vacuna(String codeVacuna, String nombre, String laboratorio, ArrayList<Enfermedad> enfermedadesQueTrata) {
+	public Vacuna(String codeVacuna, String nombre, String laboratorio) {
 		super();
 		this.codeVacuna = codeVacuna;
 		this.nombre = nombre;

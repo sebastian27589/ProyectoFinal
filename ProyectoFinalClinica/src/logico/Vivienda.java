@@ -11,7 +11,7 @@ public class Vivienda {
 	private String ciudad;
 	private String telefonoResi;
 	
-	public Vivienda(String calle, String numero, String sector, String ciudad, String telefonoResi, ArrayList<Paciente> residentes) {
+	public Vivienda(String calle, String numero, String sector, String ciudad, String telefonoResi) {
 		super();
 		this.residentes = new ArrayList<Paciente>();
 		this.calle = calle;

@@ -259,7 +259,7 @@ public class RegVivienda extends JDialog {
 						
 						if (vivienda == null) {
 							
-							Vivienda nuevaVivienda = new Vivienda(txtCalle.getText(), spnNumero.getValue().toString(), txtSector.getText(), txtCiudad.getText(), txtTelefono.getText(), null);
+							Vivienda nuevaVivienda = new Vivienda(txtCalle.getText(), spnNumero.getValue().toString(), txtSector.getText(), txtCiudad.getText(), txtTelefono.getText());
 							nuevaVivienda.getResidentes().addAll(residentesAAgregar);
 							Clinica.getInstance().insertarVivienda(nuevaVivienda);
 							JOptionPane.showMessageDialog(null, "Registrada con éxito", "Registrar Vivienda", JOptionPane.INFORMATION_MESSAGE);
