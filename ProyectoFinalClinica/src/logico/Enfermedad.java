@@ -8,7 +8,7 @@ public class Enfermedad {
 	private int indPeligro;
 	private boolean vigilada;
 
-	public Enfermedad(String nombre, String tipo, String sintomas, int indPeligro,boolean vigilada) {
+	public Enfermedad(String nombre, String tipo, String sintomas, int indPeligro, boolean vigilada) {
 		super();
 		this.nombre = nombre;
 		this.tipo = tipo;

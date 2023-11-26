@@ -145,6 +145,38 @@ public class Clinica {
 		System.out.println(misPersonas.size()+" pacientes");
 	}
 	
+	public void insertarEnfermedad(Enfermedad nuevaEnfermedad) {
+		
+		misEnfermedades.add(nuevaEnfermedad);
+		// Sysout de verificación [[Borrar más tarde]]
+		System.out.println(misEnfermedades.size()+" enfermedades");
+		for (Enfermedad enfermedad : misEnfermedades) {
+			System.out.println("Nombre: " +enfermedad.getNombre()+ ", Síntomas: " + enfermedad.getSintomas()+ ", Tipo: " +enfermedad.getTipo()+ ", Indice de peligrosidad: " +enfermedad.getIndPeligro());
+		}
+		
+	}
+	
+	public void actualizarEnfermedad(Enfermedad enfermedad) {
+		int index = buscarIndexEnfermedadByNombre(enfermedad.getNombre());
+		misEnfermedades.set(index, enfermedad);
+		
+	}
+	
+	private int buscarIndexEnfermedadByNombre(String nombreEnfermedad) {
+		int index = -1;
+		boolean encontrado = false;
+		int i = 0;
+		while (!encontrado && i < misEnfermedades.size()) {
+			if(misEnfermedades.get(i).getNombre().equalsIgnoreCase(nombreEnfermedad)){
+				encontrado = true;
+				index = i;
+			}
+			i++;
+			
+		}
+		return index;
+	}
+
 	public Vacuna buscarVacunaByCode(String codigo) {
 		
 		Vacuna vacunaABuscar = null;
@@ -209,6 +241,9 @@ public class Clinica {
 		
 		return viviendaABuscar;
 	}
+
+
+
 	
 	
 }
