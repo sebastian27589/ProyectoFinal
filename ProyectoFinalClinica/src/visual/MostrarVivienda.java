@@ -63,6 +63,8 @@ public class MostrarVivienda extends JDialog {
 		Clinica.getInstance().insertarVivienda(v1);
 		Clinica.getInstance().insertarVivienda(v2);
 		
+		//jajajajajjajajajajajaaj
+		
 		setResizable(false);
 		setTitle("Mostrar Viviendas");
 		setBounds(100, 100, 857, 443);
