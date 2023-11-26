@@ -74,8 +74,8 @@ public class ElegirVacunaPaciente extends JDialog {
 			setTitle("Modificar Vacunas del Paciente");
 		}
 		
-		Vacuna vac1 = new Vacuna("000", "neumococo", "LabSpain", null);
-		Vacuna vac2 = new Vacuna("001", "19-Vaccine", "Pfizer", null);
+		Vacuna vac1 = new Vacuna("000", "neumococo", "LabSpain");
+		Vacuna vac2 = new Vacuna("001", "19-Vaccine", "Pfizer");
 		Clinica.getInstance().insertarVacuna(vac1);
 		Clinica.getInstance().insertarVacuna(vac2);
 		

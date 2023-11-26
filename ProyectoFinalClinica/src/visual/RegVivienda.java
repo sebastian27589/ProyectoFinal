@@ -64,11 +64,11 @@ public class RegVivienda extends JDialog {
 	 */
 	public RegVivienda(Vivienda viviendaAModificar, boolean mod) {
 		
-		/*
-		 * Pacientes para probar el botón de búsqueda por cédula 
-		Clinica.getInstance().insertarPaciente(new Paciente("001", "Julito", null, 'M', "809", "123232", "000", null, null));
-		Clinica.getInstance().insertarPaciente(new Paciente("100", "Pedrito", null, 'M', "809", "123232", "000", null, null));
-		*/
+		
+		//Pacientes para probar el botón de búsqueda por cédula 
+		Clinica.getInstance().insertarPaciente(new Paciente("001", "Julito", null, 'M', "809", "123232", "000"));
+		Clinica.getInstance().insertarPaciente(new Paciente("100", "Pedrito", null, 'M', "809", "123232", "000"));
+		
 		setTitle("Registrar Vivienda");
 		
 		vivienda = viviendaAModificar;
