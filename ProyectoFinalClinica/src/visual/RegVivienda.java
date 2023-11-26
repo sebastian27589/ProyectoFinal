@@ -42,7 +42,7 @@ public class RegVivienda extends JDialog {
 	private JTextField txtNombre;
 	private Vivienda vivienda = null;
 	private ArrayList<Paciente> residentesAAgregar = new ArrayList<Paciente>();
-	private Paciente pacienteABuscar = new Paciente("", "", null, '0', "", "", "", null, null);
+	private Paciente pacienteABuscar = new Paciente("", "", null, '0', "", "", "");
 	private JSpinner spnNumero;
 	private JButton btnAsignar;
 	

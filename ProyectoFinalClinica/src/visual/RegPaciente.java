@@ -27,6 +27,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import com.toedter.calendar.JDateChooser;
 
+import logico.Clinica;
 import logico.Paciente;
 import logico.Vacuna;
 
@@ -37,9 +38,12 @@ public class RegPaciente extends JDialog {
 	private JTextField txtNombre;
 	private JTextField txtCedula;
 	private JTextField txtTelefono;
-	public static ArrayList<Vacuna> vacunasAInsertar = new ArrayList<Vacuna>();
 	private Paciente paciente = null;
 	private JDateChooser dateChooserNacim;
+	private JRadioButton rdbtnMasculino;
+	private JRadioButton rdbtnFemenino;
+	private JTextArea txtareaDireccion;
+	private char sexoPaciente;
 	
 	/**
 	 * Launch the application.
@@ -99,6 +103,7 @@ public class RegPaciente extends JDialog {
 			txtCodePaciente.setBounds(105, 19, 62, 22);
 			panelContenedor1.add(txtCodePaciente);
 			txtCodePaciente.setColumns(10);
+			txtCodePaciente.setText("P-"+Clinica.getInstance().getGeneradorCodePaciente());
 			
 			txtNombre = new JTextField();
 			txtNombre.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
@@ -143,12 +148,12 @@ public class RegPaciente extends JDialog {
 			lblSexo.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
 			lblSexo.setBackground(Color.WHITE);
 			
-			JRadioButton rdbtnMasculino = new JRadioButton("M");
+			rdbtnMasculino = new JRadioButton("M");
 			rdbtnMasculino.setBounds(129, 87, 38, 22);
 			panelContenedor1.add(rdbtnMasculino);
 			rdbtnMasculino.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
 			
-			JRadioButton rdbtnFemenino = new JRadioButton("F");
+			rdbtnFemenino = new JRadioButton("F");
 			rdbtnFemenino.setBounds(184, 87, 33, 22);
 			panelContenedor1.add(rdbtnFemenino);
 			rdbtnFemenino.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
@@ -187,7 +192,7 @@ public class RegPaciente extends JDialog {
 		panelGris.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Gill Sans MT", Font.PLAIN, 13));
 		
-		JTextArea txtareaDireccion = new JTextArea();
+		txtareaDireccion = new JTextArea();
 		txtareaDireccion.setBounds(181, 11, 257, 54);
 		panelGris.add(txtareaDireccion);
 		txtareaDireccion.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
@@ -214,14 +219,48 @@ public class RegPaciente extends JDialog {
 						
 						if (paciente == null) {
 							
-							//Paciente nuevoPaciente = new Paciente(txtCedula.getText(), txtNombre.getText(), , sexo, telefono, direccion, codePaciente, misConsultas, misVacunas)
+							if (rdbtnMasculino.isSelected()) {
+								
+								sexoPaciente = 'M';
+							}
+							else {
+								
+								sexoPaciente = 'F';
+							}
 							
+							Paciente nuevoPaciente = new Paciente(txtCedula.getText(), txtNombre.getText(), dateChooserNacim.getDate(),
+									 sexoPaciente, txtTelefono.getText(), txtareaDireccion.getText(), txtCodePaciente.getText());
+							
+							ElegirVacunaPaciente elegirVacunas = new ElegirVacunaPaciente(null);
+							elegirVacunas.setModal(true);
+							elegirVacunas.setVisible(true);
+							nuevoPaciente.getMisVacunas().addAll(elegirVacunas.extraerVacunasElegidas());
+							Clinica.getInstance().insertarPaciente(nuevoPaciente);
+							clean();
 						}
 						else {
+					
+							if (rdbtnMasculino.isSelected()) {
+								
+								sexoPaciente = 'M';
+							}
+							else {
+								
+								sexoPaciente = 'F';
+							}
 							
+							paciente.setTelefono(txtTelefono.getText());
+							paciente.setDireccion(txtareaDireccion.getText());
+							
+							ElegirVacunaPaciente elegirVacunas = new ElegirVacunaPaciente(paciente);
+							elegirVacunas.setModal(true);
+							elegirVacunas.setVisible(true);
+							paciente.getMisVacunas().clear();
+							paciente.getMisVacunas().addAll(elegirVacunas.extraerVacunasElegidas());
+							
+							//Clinica.getInstance().actualizarPaciente(paciente);
+							dispose();
 						}
-						
-						//ElegirVacunaPaciente elegirVacunas = new ElegirVacunaPaciente(null)
 						
 					}
 				});
@@ -242,5 +281,43 @@ public class RegPaciente extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		
+		loadPaciente();
+		
 	}
+	
+	private void loadPaciente() {
+		
+		if (paciente != null) {
+			
+			txtCodePaciente.setText(paciente.getCodePaciente());
+			txtNombre.setText(paciente.getNombre());
+			if (paciente.getSexo() == 'M') {
+				
+				rdbtnMasculino.setSelected(true);
+			}
+			else {
+				
+				rdbtnFemenino.setSelected(true);
+			}
+			txtCedula.setText(paciente.getCedula());
+			dateChooserNacim.setDate(paciente.getFechaDeNacimiento());
+			txtTelefono.setText(paciente.getTelefono());
+			
+		}
+		
+	}
+	
+	private void clean() {
+		
+		txtCodePaciente.setText("P-"+Clinica.getInstance().getGeneradorCodePaciente());
+		txtNombre.setText("");
+		rdbtnMasculino.setSelected(false);
+		rdbtnFemenino.setSelected(false);
+		txtCedula.setText("");
+		dateChooserNacim.setCalendar(null);
+		txtTelefono.setText("");
+		txtareaDireccion.setText("");
+	}
+	
 }

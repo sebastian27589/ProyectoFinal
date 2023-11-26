@@ -189,5 +189,29 @@ public class Clinica {
 		return pacienteABuscar;
 	}
 	
+	private int buscarIndexPacienteByCide(String codigo) {
+		
+		boolean encontrado = false;
+		int cont = 0, indCliente = 0;
+		
+		while (!encontrado && cont < misPersonas.size()) {
+			
+			if (misPersonas.get(cont) instanceof Paciente) {
+				
+				//if (((Paciente) misPersonas.get(cont)).getCodePaciente().equalsIgnoreCase(codigo))
+				
+			}
+			
+			/*
+			if (misPersonas.get(cont).getCode().equalsIgnoreCase(codigo)) {
+				encontrado = true;
+				indCliente = cont;
+			}
+			*/
+			cont++;
+		}
+		
+		return indCliente;
+	}
 	
 }
