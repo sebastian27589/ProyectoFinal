@@ -22,24 +22,31 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import com.toedter.calendar.JDateChooser;
+
+import logico.Paciente;
+import logico.Vacuna;
 
 public class RegPaciente extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtCodePaciente;
-	private JTextField txtSector;
-	private JTextField txtCédula;
+	private JTextField txtNombre;
+	private JTextField txtCedula;
 	private JTextField txtTelefono;
-
+	public static ArrayList<Vacuna> vacunasAInsertar = new ArrayList<Vacuna>();
+	private Paciente paciente = null;
+	private JDateChooser dateChooserNacim;
+	
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
-			RegPaciente dialog = new RegPaciente();
+			RegPaciente dialog = new RegPaciente(null);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -50,7 +57,7 @@ public class RegPaciente extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public RegPaciente() {
+	public RegPaciente(Paciente pacienteAModificar) {
 		setResizable(false);
 		setTitle("Registrar Paciente");
 		setBounds(100, 100, 554, 331);
@@ -87,16 +94,17 @@ public class RegPaciente extends JDialog {
 			}
 			
 			txtCodePaciente = new JTextField();
+			txtCodePaciente.setEditable(false);
 			txtCodePaciente.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
 			txtCodePaciente.setBounds(105, 19, 62, 22);
 			panelContenedor1.add(txtCodePaciente);
 			txtCodePaciente.setColumns(10);
 			
-			txtSector = new JTextField();
-			txtSector.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
-			txtSector.setColumns(10);
-			txtSector.setBounds(105, 54, 140, 22);
-			panelContenedor1.add(txtSector);
+			txtNombre = new JTextField();
+			txtNombre.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
+			txtNombre.setColumns(10);
+			txtNombre.setBounds(105, 54, 140, 22);
+			panelContenedor1.add(txtNombre);
 			
 			JLabel lblCédula = new JLabel("C\u00E9dula:");
 			lblCédula.setOpaque(true);
@@ -107,11 +115,11 @@ public class RegPaciente extends JDialog {
 			lblCédula.setBounds(291, 19, 72, 22);
 			panelContenedor1.add(lblCédula);
 			
-			txtCédula = new JTextField();
-			txtCédula.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
-			txtCédula.setColumns(10);
-			txtCédula.setBounds(373, 19, 140, 22);
-			panelContenedor1.add(txtCédula);
+			txtCedula = new JTextField();
+			txtCedula.setFont(new Font("Gill Sans MT", Font.PLAIN, 15));
+			txtCedula.setColumns(10);
+			txtCedula.setBounds(373, 19, 140, 22);
+			panelContenedor1.add(txtCedula);
 			
 			JLabel lblFechaNacim = new JLabel("F. de nac:");
 			lblFechaNacim.setOpaque(true);
@@ -122,7 +130,7 @@ public class RegPaciente extends JDialog {
 			lblFechaNacim.setBounds(291, 54, 72, 22);
 			panelContenedor1.add(lblFechaNacim);
 			
-			JDateChooser dateChooserNacim = new JDateChooser();
+			dateChooserNacim = new JDateChooser();
 			dateChooserNacim.setBounds(373, 54, 140, 22);
 			panelContenedor1.add(dateChooserNacim);
 			
@@ -201,6 +209,22 @@ public class RegPaciente extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnSiguiente = new JButton("Siguiente");
+				btnSiguiente.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						if (paciente == null) {
+							
+							//Paciente nuevoPaciente = new Paciente(txtCedula.getText(), txtNombre.getText(), , sexo, telefono, direccion, codePaciente, misConsultas, misVacunas)
+							
+						}
+						else {
+							
+						}
+						
+						//ElegirVacunaPaciente elegirVacunas = new ElegirVacunaPaciente(null)
+						
+					}
+				});
 				btnSiguiente.setFont(new Font("Gill Sans MT", Font.PLAIN, 14));
 				btnSiguiente.setActionCommand("OK");
 				buttonPane.add(btnSiguiente);
