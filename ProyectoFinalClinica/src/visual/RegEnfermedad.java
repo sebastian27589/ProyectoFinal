@@ -55,6 +55,7 @@ public class RegEnfermedad extends JDialog {
 			e.printStackTrace();
 		}
 	}
+	//Prueba 1 de 2
 
 	/**
 	 * Create the dialog.
